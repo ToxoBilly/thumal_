@@ -872,6 +872,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
+    color: rgb(0, 242, 255);
 }
 
 .tab-btn:hover {
@@ -1165,7 +1166,7 @@ body {
     }
     
     .tab-btn.active {
-        background: #fff0c6be;
+        background: #8e7149dc;
         border-color: #ff6200;
     }
     
