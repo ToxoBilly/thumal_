@@ -9,7 +9,7 @@ let serverConnected = false;
 let deferredPrompt = null;
 
 // Configuration
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://toxobilly.pythonanywhere.com/api';
 const TRANSLATION_CACHE = new Map();
 const MAX_RECENT_SEARCHES = 10;
 const MAX_FAVORITES = 100;
