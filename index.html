@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mizo Dictionary - English to Mizo Dictionary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2a3950">
+    <meta name="description" content="Free online English to Mizo dictionary with definitions, favorites, and word of the day">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="banner-container">
+            <a href="#" class="logo">
+                <i class="fas fa-book"></i>
+                THUMAL-Word Search
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Search Header -->
+        <div class="search-header">
+            <h1 class="search-title">THUMAL</h1>
+            <p class="search-subtitle">Find definitions, translations, and meanings of English words in Mizo</p>
+            <div class="language-toggle">
+    <button class="tab-btn active" data-mode="offline" id="offline-tab">
+        ⚡ Offline
+        <small style="display: block; font-size: 0.8em; opacity: 0.8;">English → Mizo</small>
+    </button>
+    <button class="tab-btn" data-mode="online" id="online-tab">
+        🌐 Online
+        <small style="display: block; font-size: 0.8em; opacity: 0.8;">Translation</small>
+    </button>
+</div>
+
+<!-- Sub-toggle for Online mode (appears when Online is active) -->
+<div class="language-toggle" id="online-direction-toggle" style="display: none; margin-top: 10px;">
+    <button class="tab-btn" data-direction="en-to-mizo" id="en-to-mizo-btn">
+        English → Mizo
+    </button>
+    <button class="tab-btn active" data-direction="mizo-to-en" id="mizo-to-en-btn">
+        Mizo → English
+    </button>
+</div>
+
+<!-- Server Status (only shows in Online mode) -->
+<div id="server-status" style="display: none; text-align: center; margin: 10px 0; padding: 8px; background: #e8f5e9; border-radius: 20px; font-size: 13px; color: #2e7d32;">
+    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #4caf50; margin-right: 8px; animation: pulse 2s infinite;"></span>
+    <span id="status-text">Online</span>
+</div>
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Enter a word to look up..." autofocus>
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="dictionary">Dictionary</button>
+            <button class="tab" data-tab="sudoku" onclick="window.location.href='sudoku.html'">
+            🧩 Sudoku
+            </button>
+            <button class="tab" data-tab="wotd" id="wotd-tab">Word of the Day</button>
+        </div>
+
+        <!-- Dictionary View -->
+        <div class="content-area active" id="dictionaryView">
+            <div class="results-section">
+                <div class="results-header">
+                    <h2 class="results-title" id="resultsTitle">Dictionary Results</h2>
+                    <div class="results-subtitle" id="resultsSubtitle">Type a word to begin your search</div>
+                </div>
+                <div class="results-container" id="dictionaryResults">
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>Search the Dictionary</h3>
+                        <p>Enter a word in the search bar above to find its Mizo definition</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Favorites View -->
+        <div class="content-area" id="favoritesView">
+            <div class="results-section">
+                <div class="results-header">
+                    <h2 class="results-title">My Favorite Words</h2>
+                    <div class="results-subtitle">Words you've saved for quick access</div>
+                </div>
+                <div class="results-container">
+                    <div class="favorites-list" id="favoritesList">
+                        <div class="empty-state">
+                            <i class="fas fa-star"></i>
+                            <h3>No favorites yet</h3>
+                            <p>Click the star icon on any word to add it to your favorites</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Word of the Day View -->
+        <div class="content-area" id="wotdView">
+            <div class="results-section">
+                <div class="results-header">
+                    <h2 class="results-title">Word of the Day</h2>
+                    <div class="results-subtitle">Expand your vocabulary daily</div>
+                </div>
+                <div class="results-container">
+                    <div id="wotdContent">
+                        <div class="empty-state">
+                            <i class="fas fa-calendar-day"></i>
+                            <h3>Loading Word of the Day...</h3>
+                            <p>Discover new words every day</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Word of the Day Card -->
+            <div class="wotd-card" id="sidebarWotd">
+                <div class="wotd-label">Word of the Day</div>
+                <div class="wotd-word" id="sidebarWotdWord">Loading...</div>
+                <div class="wotd-definition" id="sidebarWotdDef"></div>
+            </div>
+
+            <!-- Favorites -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-star"></i> My Favorites
+                </h3>
+                <div class="favorites-list" id="sidebarFavorites">
+                    <div class="empty-state" style="padding: 20px 0;">
+                        <i class="fas fa-star" style="font-size: 24px;"></i>
+                        <p style="font-size: 12px;">No favorites yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Searches -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-history"></i> Recent Searches
+                </h3>
+                <div class="recent-words" id="recentSearches">
+                    <div class="empty-state" style="padding: 10px 0;">
+                        <p style="font-size: 12px;">No recent searches</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Install PWA -->
+            <button class="install-btn" id="installButton" style="display: none;">
+                <i class="fas fa-download"></i> Install App
+            </button>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <span id="wordCount">Mizo Dictionary - English to Mizo translations</span>
+            <span id="searchStats"></span>
+        </div>
+    </div>
+
+    <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <i class="fas fa-book"></i> THUMAL - Word Dictionary
+                </div>
+                <p style="margin-top: 6px; color: #ccc; font-size: 14px; line-height: 1.6;">
+                    A comprehensive English-Mizo dictionary word search with hybrid translation support. 
+                    Features offline dictionary search and online Translate integration.
+                </p>
+                <p style="margin-top: 0px; color: #ccc; font-size: 14px; line-height: 1.6;">
+                    This project is developed by Simeon Billysan, while studying BCA, V semester as part of a minor project for ICFAI University Mizoram 2023-2026.
+                </p>
+
+                <div class="footer-contact">
+                    <p><i class="fas fa-envelope"></i> sumeebillysan@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 8119 801 715</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Aizawl, Mizoram, India</p>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/l.e.o.b.i.l.l.y/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2025 THUMAL Dictionary. All Rights Reserved.
+            </div>
+        </footer>
+
+    <script src="script.js">
+    </script>
+</body>
+</html>

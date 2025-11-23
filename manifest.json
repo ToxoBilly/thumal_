@@ -1,0 +1,24 @@
+{
+  "name": "Mizo Dictionary",
+  "short_name": "MizoDict",
+  "description": "English to Mizo and Mizo to English Dictionary",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2c3e50",
+  "theme_color": "#3498db",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "reference"],
+  "lang": "en"
+}
